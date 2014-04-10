@@ -8,7 +8,7 @@ This tool allows you to download GameTDB artwork, and store it to your local mac
 
 Gametdb-artwork should run on all platforms that have Python2.7 installed.
 
-** Install Python2.7 **
+**Install Python2.7**
 
 OSX (via homebrew):
 
@@ -28,13 +28,13 @@ $ sudo pip install --upgrade setuptools
 $ sudo pip install --upgrade pip
 ```
 
-** Clone github repository **
+**Clone github repository**
 
 ```bash
 $ git clone https://github.com/dblommesteijn/gametdb-artwork
 ```
 
-** Install the application onto your system **
+**Install the application onto your system**
 
 ```bash
 $ cd gametdb-artwork/
@@ -42,7 +42,7 @@ $ chmod +x setup.py
 $ sudo ./setup.py install --record installation_files.txt
 ```
 
-** Uninstalling **
+**Uninstalling**
 
 ```bash
 # some files may require you to become root
