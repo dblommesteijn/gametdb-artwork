@@ -49,7 +49,7 @@ $ gametdb-artwork -h
 ## Using the programmatical interface
 
 ```python
-from src.gametdb import GametDb
+from gametdbartwork.gametdb import GametDb
 # collect covers for R30P01 (downloads them to the current directory)
 # NOTE: GametDb by default creates a structure for the stored covers with `./tmp/<UUID>/<ids>.png`
 GametDb(target="./", output=True, debug=True).retrieve_single("R3OP01")
