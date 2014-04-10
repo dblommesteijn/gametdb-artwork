@@ -7,7 +7,7 @@ Gametdb Artwork Downloader
 
 **OS X (Mavericks)**
 
-1. Install Python2.7
+* Install Python2.7
 
 ```bash
 $ brew install python
@@ -16,13 +16,13 @@ $ pip install --upgrade setuptools
 $ pip install --upgrade pip
 ```
 
-2. Clone github repository
+* Clone github repository
 
 ```bash
 $ git clone https://github.com/dblommesteijn/gametdb-artwork
 ```
 
-3. Install the application onto your system
+* Install the application onto your system
 
 ```bash
 $ cd gametdb-artwork/
@@ -30,7 +30,7 @@ $ chmod +x setup.py
 $ sudo ./setup.py install --record installation_files.txt
 ```
 
-4. Uninstalling
+* Uninstalling
 
 ```bash
 # some files may require you to become root
