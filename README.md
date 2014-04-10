@@ -1,13 +1,16 @@
 # gametdb-artwork
 
-Gametdb Artwork Downloader
+This tool allows you to download GameTDB artwork, and store it to your local machine. It's written in Python, provides command line, and programatical interface.
 
+*NOTE: GameTDB (http://www.gametdb.com/) provides game artwork for Consoles (Wii(U), PS3).*
 
 ## Installation
 
-**OS X (Mavericks)**
+Gametdb-artwork should run on all platforms that have Python2.7 installed.
 
-* Install Python2.7
+** Install Python2.7 **
+
+OSX (via homebrew):
 
 ```bash
 $ brew install python
@@ -16,13 +19,22 @@ $ pip install --upgrade setuptools
 $ pip install --upgrade pip
 ```
 
-* Clone github repository
+Ubuntu/ Debian (Linux):
+
+```bash
+$ sudo apt-get install python
+# verify latest pip & setuptools
+$ sudo pip install --upgrade setuptools
+$ sudo pip install --upgrade pip
+```
+
+** Clone github repository **
 
 ```bash
 $ git clone https://github.com/dblommesteijn/gametdb-artwork
 ```
 
-* Install the application onto your system
+** Install the application onto your system **
 
 ```bash
 $ cd gametdb-artwork/
@@ -30,12 +42,13 @@ $ chmod +x setup.py
 $ sudo ./setup.py install --record installation_files.txt
 ```
 
-* Uninstalling
+** Uninstalling **
 
 ```bash
 # some files may require you to become root
 $ sudo cat installation_files.txt | xargs rm -rf
 ```
+
 
 ## Using the CLI
 
