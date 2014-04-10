@@ -15,17 +15,27 @@ def main():
   parser.add_option("-d", "--debug", dest="debug", help="print errors (default off)", default=False)
   parser.add_option("-o", "--output", dest="output", help="verbose output (default on)", default=True)
   parser.add_option("-u", "--url", dest="url", help="alternate url", default="http://art.gametdb.com")
+  parser.add_option("-f", "--file", dest="file", help="arguments from file")
   parser.add_option("-l", "--languages", dest="languages", help="search languages 'US,EN,JA,NL,DE,FR'", default="US,EN,JA,NL,DE,FR")
   (options, args) = parser.parse_args()
-
-  if args == []:
+  if args == [] and options.file == None:
     print "No options given, quitting... (try --help)"
     return 0
-
   # initialize
   gametdb = GametDb(platforms=options.platforms.split(','), extensions=options.extensions.split(','), target=options.target, output=options.target, debug=options.debug, url=options.url, languages=options.languages.split(","))
   # collect multiple
-  gametdb.retrieve_multi(args)
-
+  if options.file != None:
+    # f = open(options.file)
+    content = None
+    with open(options.file) as f:
+      content = f.read().splitlines()
+    ids = []
+    for c in content:
+      ids.append(str(c))
+  else:
+    ids = args
+  # collect
+  gametdb.retrieve_multi(ids)
+  
 if __name__ == "__main__":
   main()
