@@ -16,16 +16,20 @@ class GametDb():
     self.platform = ["wii", "ps3"]
     if 'platform' in kwargs:
       self.platform = [kwargs['platform']]
-    # required fixed attributes
-    self.type = {"cover": "", "cover3D": "3d", "disc": "disc", "coverfullHQ": "full", "coverfull": "full"}
-    self.languages = ["EN", "US", "NL", "DE", "FR"]
-    self.extension = ".png"
+    self.languages = ["EN", "US", "JA", "NL", "DE", "FR"]
+    if 'languages' in kwargs:
+      self.languages = kwargs['languages']
+    self.extensions = ["png", "jpg"]
+    if 'extensions' in kwargs:
+      self.extensions = kwargs['extensions']
     self.target = "tmp/" + str(uuid.uuid1())
     if 'target' in kwargs:
       self.target = kwargs['target']
     self.debug = False
     if 'debug' in kwargs:
       self.debug = kwargs['debug']
+    # required fixed attributes for storing and recovering types
+    self.type = {"cover": "", "cover3D": "3d", "disc": "disc", "coverfullHQ": "full", "coverfull": "full"}
 
   def retrieve_multi(self, ids):
     downloads = {}
@@ -42,26 +46,27 @@ class GametDb():
       for t in self.type.keys():
         t_target = self.type[t]
         for l in self.languages:
-          found = False
-          cover_url = self.url + "/" + p + "/" + t + "/" + l + "/" + id + self.extension
-          try:
-            u = urllib2.urlopen(cover_url)
-            t_target_name = t_target
-            if t_target_name == '':
-              t_target_name = "cover"
-            # download and report
-            downloaded[t_target_name] = self.__download(u, cover_url, t_target)
-            if self.output:
-              sys.stdout.write(t + " ")
-              sys.stdout.flush()
-            found = True
-          except Exception as e:
-            if self.debug:
-              print cover_url
-              print e
-            pass
-          if found:
-            break
+          for e in self.extensions:
+            found = False
+            cover_url = self.url + "/" + p + "/" + t + "/" + l + "/" + id + "." + e
+            try:
+              u = urllib2.urlopen(cover_url)
+              t_target_name = t_target
+              if t_target_name == '':
+                t_target_name = "cover"
+              # download and report
+              downloaded[t_target_name] = self.__download(u, cover_url, t_target)
+              if self.output:
+                sys.stdout.write(t + " ")
+                sys.stdout.flush()
+              found = True
+            except Exception as e:
+              if self.debug:
+                print cover_url
+                print e
+              pass
+            if found:
+              break
     if self.output:
       sys.stdout.write("\n")
       sys.stdout.flush()

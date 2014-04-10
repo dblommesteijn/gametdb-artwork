@@ -16,19 +16,34 @@ $ pip install --upgrade setuptools
 $ pip install --upgrade pip
 ```
 
-2. Install the application onto your system
+2. Clone github repository
 
 ```bash
+$ git clone https://github.com/dblommesteijn/gametdb-artwork
+```
+
+3. Install the application onto your system
+
+```bash
+$ cd gametdb-artwork/
 $ chmod +x setup.py
-$ sudo ./setup.py install
+$ sudo ./setup.py install --record installation_files.txt
+```
+
+4. Uninstalling
+
+```bash
+# some files may require you to become root
+$ sudo cat installation_files.txt | xargs rm -rf
 ```
 
 ## Using the CLI
 
 ```bash
-# download a single 
-$ gametdb-artwork 
-* stub
+# download artwork to `./tmp/<UUID>/BLES01807.jpg`
+$ gametdb-artwork BLES01807
+# print command options
+$ gametdb-artwork -h
 ```
 
 ## Using the programmatical interface
@@ -40,12 +55,14 @@ from src.gametdb import GametDb
 GametDb(target="./", output=True, debug=True).retrieve_single("R3OP01")
 ```
 
-**Options:**
+*NOTE: by default all types and platforms will be iterated to find a match for the given ID or serial. By limiting the scope of extensions and platforms less requests have to be made to the URL (so it's faster).*
 
-  * target: alternate directory
-  * output: stdout output
-  * debug: error reporting
-
+```python
+# retrieve Wii covers (png files)
+GametDb(platforms='wii', extensions=['png']).retrieve_single("R3OP01")
+# retrieve PS3 covers (jpg files)
+GametDb(platforms='ps3', extensions=['jpg']).retrieve_single("BLES01807")
+```
 
 
 ## Testing

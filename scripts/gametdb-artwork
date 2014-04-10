@@ -1,7 +1,31 @@
 #!/usr/bin/env python
 
+from gametdbartwork.gametdb import GametDb
+
+import uuid
+from optparse import OptionParser
+# from gametdb import GametDb
+
 def main():
-  print "gametdb-artwork!!"
+  usage = "usage: %prog [options] id1 id2 id3..."
+  parser = OptionParser(usage=usage)
+  parser.add_option("-p", "--platform", dest="platforms", help="select platform 'wii,ps3'", default="wii,ps3")
+  parser.add_option("-e", "--extensions", dest="extensions", help="select extensions 'png,jpg'", default="jpg,png")
+  parser.add_option("-t", "--target", dest="target", help="directory output target './tmp/<UUID>/...'", default="tmp/" + str(uuid.uuid1()))
+  parser.add_option("-d", "--debug", dest="debug", help="print errors (default off)", default=False)
+  parser.add_option("-o", "--output", dest="output", help="verbose output (default on)", default=True)
+  parser.add_option("-u", "--url", dest="url", help="alternate url", default="http://art.gametdb.com")
+  parser.add_option("-l", "--languages", dest="languages", help="search languages 'US,EN,JA,NL,DE,FR'", default="US,EN,JA,NL,DE,FR")
+  (options, args) = parser.parse_args()
+
+  if args == []:
+    print "No options given, quitting... (try --help)"
+    return 0
+
+  # initialize
+  gametdb = GametDb(platforms=options.platforms.split(','), extensions=options.extensions.split(','), target=options.target, output=options.target, debug=options.debug, url=options.url, languages=options.languages.split(","))
+  # collect multiple
+  gametdb.retrieve_multi(args)
 
 if __name__ == "__main__":
   main()
