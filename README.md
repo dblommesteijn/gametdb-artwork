@@ -46,7 +46,7 @@ $ sudo ./setup.py install --record installation_files.txt
 
 ```bash
 # some files may require you to become root
-$ sudo cat installation_files.txt | xargs rm -rf
+$ cat installation_files.txt | xargs sudo rm -rf
 ```
 
 
