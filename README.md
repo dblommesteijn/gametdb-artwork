@@ -22,7 +22,7 @@ $ pip install --upgrade pip
 Ubuntu/ Debian (Linux):
 
 ```bash
-$ sudo apt-get install python
+$ sudo apt-get install python python-pip
 # verify latest pip & setuptools
 $ sudo pip install --upgrade setuptools
 $ sudo pip install --upgrade pip
